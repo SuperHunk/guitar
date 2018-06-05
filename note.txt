@@ -1,0 +1,77 @@
+root@this:/usr/local/mysql# bin/mysql -uroot -proot  --execute="SELECT * FROM gest_pescara.orders WHERE o_time  > NOW() - INTERVAL 2 DAY;" | md5sum
+
+netsh wlan set hostednetwork mode=allow ssid=u6 key=123552195
+netsh wlan start hostednetwork
+netsh wlan set hostednetwork mode=disallow
+
+timedatectl 命令
+(1) 读取时间
+timedatectl //等同于 timedatectl status
+
+(2)?设置时间
+timedatectl set-time "YYYY-MM-DD HH:MM:SS"
+
+(3)?列出所有时区
+timedatectl list-timezones
+
+(4)?设置时区
+timedatectl set-timezone Asia/Shanghai
+
+(5)?是否NTP服务器同步
+timedatectl set-ntp yes //yes或者no
+
+(6)?将硬件时钟调整为与本地时钟一致
+timedatectl set-local-rtc 1
+hwclock --systohc --localtime //与上面命令效果一致
+注意: 硬件时钟默认使用UTC时间，因为硬件时钟不能保存时区和夏令时调整，修改后就无法从硬件时钟中读取出准确标准时间，因此不建议修改。修改后系统会出现下面的警告。
+
+? yum --security check-update #List only security updates ? yum --security update #Install security updates onl
+
+#!/bin/bash useradd -m -G users $1 echo Password123 | passwd --stdin $1 passwd -e $1 setquota -u $1 20000 25000 0 0 /home
+ausearch	-m	avc	-c	httpd
+# ausearch -m avc -ts recent 查看最近SELINUX的拒绝项
+# chcon -Rv --reference /var/www/html /install/k
+# chcon -Rv --type httpd_sys_content_t  /install.ks
+chcon	--type	var_t	/var/www/html/index.html
+restorecon	-v	/var/www/html/index.html
+restorecon	-Rv	/www
+matchpathcon	-V	/www/html/index.htm
+seinfo	-uuser_u	-x
+semanage fcontext -l | grep '/var/www'
+semanage	login	-l
+semanage	login	-a	-s	user_u	test
+semanage	login	-a	-s	guest_u	test
+getsebool	allow_guest_exec_content
+setsebool	allow_guest_exec_content	off
+semanage	fcontext	--add	--type	httpd_sys_content_t	"/www(/.*)?"
+sesearch	--allow	--source	httpd_t	--target	httpd_sys_content_t	--class	fil
+yum	install	policycoreutils	policycoreutils-python	selinux-policy	selinuxpolicy-targeted	libselinux-utils	setroubleshoot-server	setools	setoolsconsole	mcstran
+
+
+
+
+
+$	sudo	firewall-cmd	--permanent	--zone=trusted	--add-source=10.0.1.0/24 
+Then	we	integrate	the	LAN	interface	eth1	to	a	zone	called	internal: 
+$	sudo	firewall-cmd	--change-interface=eth1	--zone=internal	--permanent 
+We	do	the	same	for	the	WAN	interface	eth0	to	a	zone	called	external: 
+$	sudo	firewall-cmd	--change-interface=eth0	--zone=external	--permanent 
+Then	we	configure	the	masquerade	option	for	the	external	WAN: 
+$	sudo	firewall-cmd	--zone=external	--add-masquerade	--permanent 
+For	an	optional	DNS	configuration,	we	can	make	it	pass	through	the	internal	zone: 
+$	sudo	firewall-cmd	--zone=internal	--add-service=dns	–-permanent 
+Before	we	finish,	we	make	sure	that	the	NAT	is	configured	to	pass	through	traffic	from	the LAN	to	the	WAN	interface: 
+$	sudo	firewall-cmd	--permanent	--direct	--passthrough	ipv4	-t	nat	-I	POSTROUTING	-o	eth0	-j	MASQUERADE	-s	10.0.1.0/24	
+Finally,	we	need	to	reload	the	firewall	service	so	that	the	configuration	takes	effect: 
+$	sudo	firewall-cmd	–reload 
+
+Then,	we	run	the	Docker	installation	script: 
+$	sudo	curl	-sSL	https://get.docker.com/	|	sh
+
+
+Software	as	a	Service	(SaaS) 
+Platform	as	a	Service	(PaaS) 
+Infrastructure	as	a	Service	(IaaS)
+
+
+yum install clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd
